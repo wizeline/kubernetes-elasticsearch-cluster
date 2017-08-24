@@ -51,16 +51,20 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
-        - name: "CLUSTER_NAME"
-          value: "myesdb"
+        - name: CLUSTER_NAME
+          value: es-prod-wizeline-net
         - name: NODE_MASTER
           value: "false"
         - name: NODE_DATA
           value: "false"
+        - name: NODE_INGEST
+          value: "true"
         - name: HTTP_ENABLE
           value: "true"
-        - name: "ES_JAVA_OPTS"
+        - name: ES_JAVA_OPTS
           value: "-Xms256m -Xmx256m"
+        - name: NETWORK_HOST
+          value: _eth0_
         ports:
         - containerPort: 9200
           name: http
