@@ -14,6 +14,18 @@ spec:
         component: elasticsearch
         role: data
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: "instanceGroup"
+                    operator: In
+                    values: ["diamond"]
+      tolerations:
+        - key: "instanceGroup"
+          operator: "Equal"
+          value: "diamond"
       initContainers:
       - name: init-sysctl
         image: busybox

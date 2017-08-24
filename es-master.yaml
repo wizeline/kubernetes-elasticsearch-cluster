@@ -20,6 +20,18 @@ spec:
         command: ["sysctl", "-w", "vm.max_map_count=262144"]
         securityContext:
           privileged: true
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: "instanceGroup"
+                    operator: In
+                    values: ["diamond"]
+      tolerations:
+        - key: "instanceGroup"
+          operator: "Equal"
+          value: "diamond"
       containers:
       - name: es-master
         securityContext:
