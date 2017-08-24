@@ -14,6 +14,18 @@ spec:
         component: elasticsearch
         role: data
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: "groupName"
+                    operator: In
+                    values: ["carbon"]
+      tolerations:
+        - key: "groupName"
+          operator: "Equal"
+          value: "carbon"
       initContainers:
       - name: init-sysctl
         image: busybox
